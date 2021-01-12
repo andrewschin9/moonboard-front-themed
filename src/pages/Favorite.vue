@@ -44,36 +44,6 @@
 </template>
 
 <style>
-span#fave {
-  margin-left: 10px;
-  font-size: 20px;
-}
-hr#t1 {
-  border-color: black;
-}
-strong#t1 {
-  color: black;
-}
-strong#t2 {
-  margin-left: 10px;
-  font-size: 13px;
-}
-p#showProbs {
-  color: rgb(123, 123, 229);
-  margin-bottom: 0px;
-  margin-top: 40px;
-}
-button#close {
-  margin-bottom: 15px;
-  margin-right: 20px;
-}
-p#tip1 {
-  color: rgb(183, 183, 183);
-  font-style: italic;
-}
-hr#bold {
-  border-color: black;
-}
 </style>
 
 <script>
@@ -117,9 +87,10 @@ export default {
     };
   },
   created: function () {
-    this.problemsIndex();
-    this.pickedHoldsIndex();
     this.favoritesIndex();
+  },
+  mounted: function () {
+    this.pickedHoldsIndex();
   },
   methods: {
     toggleFavorite: function () {
@@ -127,9 +98,7 @@ export default {
         (item) => item.problem_id === this.currentProblem.id
       );
       if (fave) {
-        axios
-          .delete("http://localhost:3000/api/favorites/" + fave.id)
-          .then((response) => console.log(response));
+        axios.delete("http://localhost:3000/api/favorites/" + fave.id);
         var index = this.favorites.indexOf(fave);
         this.favorites.splice(index, 1);
       } else {
@@ -165,6 +134,22 @@ export default {
     favoritesIndex: function () {
       axios.get("http://localhost:3000/api/favorites").then((response) => {
         this.favorites = response.data;
+        this.problemsIndex();
+      });
+    },
+    problemsIndex: function () {
+      axios.get("http://localhost:3000/api/problems").then((response) => {
+        this.preProblems = response.data;
+        var i;
+        console.log(this.favorites);
+        for (i = 0; i < this.favorites.length; i++) {
+          this.problems.push(
+            this.preProblems.find(
+              (item) => item.id === this.favorites[i].problem_id
+            )
+          );
+          this.$forceUpdate();
+        }
       });
     },
     pickedHoldsIndex: function () {
@@ -183,21 +168,6 @@ export default {
         var c = filteredPicked[i].value;
         this.holds[a][b] = c;
       }
-    },
-    problemsIndex: function () {
-      axios.get("http://localhost:3000/api/problems").then((response) => {
-        this.preProblems = response.data;
-        console.log(this.preProblems);
-        var i;
-        for (i = 0; i < this.favorites.length; i++) {
-          this.problems.push(
-            this.preProblems.find(
-              (item) => item.id === this.favorites[i].problem_id
-            )
-          );
-          console.log(this.problems);
-        }
-      });
     },
     updateHolds: function (index1, index2) {
       if (this.holds[index1][index2] === "S") {

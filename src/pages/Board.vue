@@ -3,7 +3,7 @@
     <h1>CREATE A PROBLEM</h1>
     {{blankMessage}}<p><input v-model="prob_name" placeholder="Name of your problem (cannot leave blank)"></p>
     {{blankMessage}}{{blankMessage2}}<p><input v-model="grade" placeholder="Grade of your problem (don't add a V in front, must be at least 4)"></p>
-    <p>Click to start selecting:</p>
+    <p>Click buttons to start selecting:</p>
     <button id="start" type="button" class="btn-round" v-on:click="selectStart()">Starting Hold(s)</button>
     <button id="middle" type="button" class="btn-round" v-on:click="selectMiddle()">Middle Hold(s)</button>
     <button id="finish" type="button" class="btn-round" v-on:click="selectFinish()">Finishing Hold(s)</button>
@@ -27,31 +27,37 @@ button.submit {
   margin-left: 10px;
   margin-right: 10px;
   height: 50px;
-  width: 160px;
+  width: 165px;
+  background-color: transparent;
+  border-color: black;
+  color: white;
 }
 button#start {
-  margin-left: 10px;
+  margin-left: 12px;
   margin-right: 10px;
   height: 60px;
-  width: 140px;
+  width: 144px;
   background-color: green;
+  border-color: transparent;
   color: white;
 }
 button#middle {
   margin-left: 10px;
   margin-right: 10px;
   height: 60px;
-  width: 140px;
+  width: 144px;
   background-color: blue;
   color: white;
+  border-color: transparent;
 }
 button#finish {
   margin-left: 10px;
   margin-right: 10px;
   height: 60px;
-  width: 140px;
+  width: 144px;
   background-color: red;
   color: white;
+  border-color: transparent;
 }
 table#board {
   background: url(mbimg.png);
@@ -165,6 +171,9 @@ export default {
       } else if (isNaN(grade)) {
         this.blankMessage = "";
         this.blankMessage2 = "GRADE MUST ONLY BE A NUMBER";
+      } else if (grade < 4) {
+        this.blankMessage = "";
+        this.blankMessage2 = "GRADE MUST BE AT LEAST 4";
       } else {
         this.blankMessage = "";
         this.blankMessage2 = "";

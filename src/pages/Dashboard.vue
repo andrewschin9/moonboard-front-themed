@@ -2,8 +2,8 @@
   <div class="home">
     {{isLoggedIn()}}
     <h1>Problems list</h1>
-    <p>Search names: <input type="list" v-model='search_name' label='names'></p>
-    <p>Search grades: <select name="grades" id="grades" v-model='search_grade'>
+    <p id="white">Search names: <input type="list" v-model='search_name' label='names'></p>
+    <p id="white">Search grades: <select name="grades" id="grades" v-model='search_grade'>
         <option value="4">4</option>
         <option value="5">5</option>
         <option value="6">6</option>
@@ -22,14 +22,14 @@
     <hr id="t1">
      <div v-for="problem in filterBy(filterBy(problems, search_name , 'prob_name'), search_grade , 'grade')">
       <p id="showProbs" v-on:click="showProblem(problem); filterPicked()"><strong id="t1">Name: </strong> {{problem.prob_name}}</p>
-      <p><strong id="t2">Grade:</strong> {{problem.grade}}</p>
+      <p id="grayish"><strong id="t2">Grade:</strong> {{problem.grade}}</p>
       
       <dialog id="problem-details">
         <form method = "dialog">
           <button id="close" class="btn-round">Close</button>
           <span id="fave" v-on:click="toggleFavorite()" v-bind:class="isFavorite()"></span>
-          <p><strong>Name: </strong>{{currentProblem.prob_name}}</p>
-          <p><strong>Grade: </strong>{{currentProblem.grade}}</p>
+          <p><strong id="t1">Name: </strong>{{currentProblem.prob_name}}</p>
+          <p><strong id= "t1">Grade: </strong>{{currentProblem.grade}}</p>
           <table id="board">
             <tr id="tr" v-for="(row, index1) in holds">
               <td v-bind:class="updateHolds(index1,index2)" v-for="(hold, index2) in row">
@@ -44,6 +44,12 @@
 </template>
 
 <style>
+dialog#problem-details {
+  background-color: rgb(106, 104, 90);
+}
+h1 {
+  color: white;
+}
 span#fave {
   margin-left: 10px;
   font-size: 20px;
@@ -52,20 +58,31 @@ hr#t1 {
   border-color: black;
 }
 strong#t1 {
-  color: black;
+  color: rgba(255, 255, 255, 0.531);
 }
 strong#t2 {
+  color: rgba(255, 255, 255, 0.531);
   margin-left: 10px;
   font-size: 13px;
 }
+p#grayish {
+  color: gray;
+}
+,
+p#white {
+  color: white;
+}
 p#showProbs {
-  color: rgb(123, 123, 229);
+  color: rgb(163, 139, 4);
   margin-bottom: 0px;
   margin-top: 40px;
 }
 button#close {
   margin-bottom: 15px;
   margin-right: 20px;
+  border-color: transparent;
+  background-color: rgb(43, 43, 43);
+  color: rgb(183, 183, 183);
 }
 p#tip1 {
   color: rgb(183, 183, 183);
