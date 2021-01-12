@@ -6,11 +6,11 @@
         <sidebar-link to="/favorite" name="Favorites" icon="ti-star"/>
         <sidebar-link to="/board" name="Create Problem" icon="ti-view-list-alt"/>
         <sidebar-link to="/login" name="Login" icon="ti-lock"/>
-        <sidebar-link to="/icons" name="Icons" icon="ti-pencil-alt2"/>        
-        <sidebar-link to="/typography" name="Types" icon="ti-pencil-alt2"/>
+        <!-- <sidebar-link to="/icons" name="Icons" icon="ti-pencil-alt2"/>        
+        <sidebar-link to="/typography" name="Types" icon="ti-pencil-alt2"/> -->
         
       </template>
-      <mobile-menu>
+      <!-- <mobile-menu>
         <li class="nav-item">
           <a class="nav-link">
             <i class="ti-panel"></i>
@@ -24,7 +24,7 @@
           </a>
         </li>
         <li class="divider"></li>
-      </mobile-menu>
+      </mobile-menu> -->
     </side-bar>
     <div class="main-panel">
       <top-navbar></top-navbar>
