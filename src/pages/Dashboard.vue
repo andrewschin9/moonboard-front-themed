@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     {{isLoggedIn()}}
-    <h1>Problems list</h1>
+    <h1>PROBLEMS LIST</h1>
+    <hr>
+    <hr>
     <p id="white">Search names: <input type="list" v-model='search_name' label='names'></p>
     <p id="white">Search grades: <select name="grades" id="grades" v-model='search_grade'>
         <option value="4">4</option>
@@ -45,7 +47,7 @@
 
 <style>
 dialog#problem-details {
-  background-color: rgb(106, 104, 90);
+  background-color: rgb(122, 122, 122);
 }
 h1 {
   color: white;
